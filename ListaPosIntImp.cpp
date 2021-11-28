@@ -132,10 +132,10 @@ unsigned int cantidadElementos(ListaPosInt l) {
 
 ListaPosInt clon(ListaPosInt l)
 {
-	ListaPosInt cabezal = new _cabezalListaPosInt;
-	cabezal->ppio = clon(l->ppio);
-	cabezal->largo = l->largo;
-	return cabezal;
+	ListaPosInt clonada = crearListaPosInt();
+	clonada->ppio = clon(l->ppio);
+	clonada->largo = l->largo;
+	return clonada;
 }
 
 void destruir(ListaPosInt& l)

@@ -2,6 +2,8 @@
 
 #ifdef COLAPRIORIDAD_INT_IMP
 
+
+
 struct _cabezalColaPrioridadInt {
 	// NO IMPLEMENTADO
 };

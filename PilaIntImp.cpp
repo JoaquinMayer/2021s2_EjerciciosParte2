@@ -58,10 +58,10 @@ NodoPilaInt* clon(NodoPilaInt* p) {
 }
 
 PilaInt clon(PilaInt p) {
-	PilaInt cabezal = new _cabezalPilaInt;
-	cabezal->ppio = clon(p->ppio);
-	cabezal->cantidadElementos = p->cantidadElementos;
-	return cabezal;
+	PilaInt clonada = crearPilaInt();
+	clonada->ppio = clon(p->ppio);
+	clonada->cantidadElementos = p->cantidadElementos;
+	return clonada;
 }
 
 void destruir(PilaInt& p) {
