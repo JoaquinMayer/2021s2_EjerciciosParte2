@@ -5,7 +5,7 @@
 struct NodoListaPosInt {
 	int dato;
 	NodoListaPosInt* sig;
-	//NodoListaPosInt(int d) : dato(d), sig(NULL) {}
+	NodoListaPosInt(int d) : dato(d), sig(NULL) {}
 };
 
 struct _cabezalListaPosInt {
@@ -23,9 +23,14 @@ ListaPosInt crearListaPosInt()
 
 void agregar(ListaPosInt& l, int e, unsigned int pos)
 {
-	/*if (l == NULL) {
+	if (l == NULL) {
 		l = crearListaPosInt();
 		l->ppio = new NodoListaPosInt(e);
+	}
+	else if (pos == 0) {
+		NodoListaPosInt* nuevo = new NodoListaPosInt(e);
+		nuevo->sig = l->ppio;
+		l->ppio = nuevo;
 	}
 	else if (pos >= l->largo) {
 		NodoListaPosInt* aux = l->ppio;
@@ -39,15 +44,17 @@ void agregar(ListaPosInt& l, int e, unsigned int pos)
 	else {
 		NodoListaPosInt* aux = l->ppio;
 		int contador = 0;
-		while (contador < pos) {
+		while (contador < pos - 1) {
 			aux = aux->sig;
 			contador++;
 		}
 
 		NodoListaPosInt* nuevo = new NodoListaPosInt(e);
-		nuevo->sig = aux;
-		aux = nuevo;
-	}*/
+		nuevo->sig = aux->sig;
+		aux->sig = nuevo;
+	}
+
+	l->largo++;
 }
 
 void borrar(ListaPosInt& l, unsigned int pos)
@@ -63,7 +70,7 @@ int elemento(ListaPosInt l, unsigned int pos)
 
 bool esVacia(ListaPosInt l)
 {
-	return true;
+	return l->largo == 0;
 }
 
 unsigned int cantidadElementos(ListaPosInt l) {
