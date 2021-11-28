@@ -1,5 +1,10 @@
 #include "Ejercicios.h"
 
+
+//FUNCIONES AUXILIARES
+
+//PRE: 
+//POS: Se agrega el dato del nodo a la lista
 void recorrerInOrder(NodoABInt* a, ListaOrdInt& lista)
 {
 	if (a != NULL) {
@@ -8,6 +13,33 @@ void recorrerInOrder(NodoABInt* a, ListaOrdInt& lista)
 		recorrerInOrder(a->der, lista);
 	}
 }
+
+// PRE:
+// POS: Devuelve un booleano si se encuentra o no los items de la pila 1 en la pila 2
+bool estaEnPila(PilaInt& pila1, PilaInt pila2) {
+	PilaInt aux = pila2;
+	if (esVacia(pila1)) {
+		return true;
+	}
+	else if (esVacia(aux)) {
+		return false;
+	}
+	else {
+		if (top(pila1) == top(aux)) {
+			pop(pila1);
+			return true;
+		}
+		else if (esVacia(aux)) {
+			return false;
+		}
+		else {
+			pop(aux);
+			estaEnPila(pila1, aux);
+		}
+	}
+}
+
+//FIN FUNCIONES AUXILIARES
 
 ListaOrdInt Enlistar(NodoABInt* a)
 {
@@ -57,50 +89,16 @@ ListaOrdInt UnionListaOrd(ListaOrdInt l1, ListaOrdInt l2)
 
 bool EstaContenida(PilaInt p1, PilaInt p2)
 {
+	PilaInt pila1 = clon(p1);
+	PilaInt pila2 = clon(p2);
 
-	/*PilaInt pila1 = crearPilaInt();
-	pila1 = clon(p1);
-	
-	PilaInt pila2 = crearPilaInt();
-	pila2 = clon(p2);
+	bool estaContenida = true;
 
-	bool estaContenida = false;
-
-	if (esVacia(pila1)) {
-		estaContenida = true;
+	while (estaContenida && !esVacia(pila1)) {
+		estaContenida = estaEnPila(pila1, pila2);
 	}
-	else {
-		bool seguirChequeando = true;
 
-		int currentValue = top(pila1);
-
-		while (seguirChequeando && !esVacia(pila1) && !esVacia(pila2)) {
-
-			while (!esVacia(pila2)) {
-				if (currentValue == top(pila2)) {
-					pop(pila1);
-				}
-				else {
-					pop(pila2);
-				}
-			}
-
-			if (esVacia(pila1)) {
-				estaContenida = true;
-				seguirChequeando = false;
-			}
-			else if (currentValue == top(pila1)) {
-				estaContenida = false;
-				seguirChequeando = false;
-			}
-			else {
-				pila2 = clon(p2);
-			}
-		}
-
-	}*/
-
-	return true;
+	return estaContenida;
 }
 
 
@@ -120,4 +118,3 @@ ColaPrioridadInt MenorPrioridad(ColaPrioridadInt c) {
 	//IMPLEMENTAR SOLUCION
 	return NULL;
 }
-
